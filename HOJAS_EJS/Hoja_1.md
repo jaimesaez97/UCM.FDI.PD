@@ -164,3 +164,49 @@ e1 sintácticamente correcta.
 
 e2 sintácticamente incrorrecta.
 
+¿e3?
+
+### 7.
+
+**a. ¿Qué calcula f?**
+
+Calcula el mínimo entre x, y y z.
+
+**b. Halla el tipo de f**
+
+f(x,y,z) :: Eq a => a -> a -> a -> a
+
+**c. Escribe una función equivalent a f en notación currificada y escribe su tipo.**
+
+¿?¿?
+
+### 8.
+
+**a. Usando expresiones if**
+orden1:: Eq a => a -> a -> a -> (a,a,a)
+orden1 x,y,z = if (x > y) then 
+
+**b. Usando guardas**
+orden2:: Eq a => a -> a -> a -> (a,a,a)
+orden2 x, y, z 
+		| x > y && y > z 		= (x,y,z)
+		| x > y && z > y 		= (x,z,y)
+		| y > x && x > z 		= (y,x,z)
+		| y > z && z > x		= (y,z,x)
+		| z > y && y > x		= (z,y,x)
+		| z > x && x > y 		= (z,x,y)
+
+### 9.
+
+lista:: [a] -> Bool
+lista (x:xs) = length xs == 1
+
+### 10.
+
+p:: Int -> Bool
+p n = if n == 0 then True else i (n-1)
+
+i:: Int -> Bool
+i n = if n == 0 then False else p(n-1)
+
+Devuelve True si el número introducido en p es par.
