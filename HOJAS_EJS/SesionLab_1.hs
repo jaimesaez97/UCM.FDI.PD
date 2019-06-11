@@ -219,3 +219,78 @@ lmedia (x:vs)            = (media x) : lmedia vs
 -}
 
 -- EJERCICIO 12
+
+-- a)
+
+reverse1:: [a] -> [a]
+reverse1 [] = []
+reverse1 (x:xs) = reverse1 xs ++ [x]
+
+-- b)
+reverse2:: [a] -> [a]
+reverse2 xs = reverseAux xs []
+
+reverseAux:: [a] -> [a] -> [a]
+reverseAux (x:[]) ys = (x:ys)
+reverseAux (x:xs) ys = reverseAux xs (x:ys)
+
+reverse3:: [a] -> [a]
+reverse3 = foldl (flip (:)) []
+
+-- EJERCICIO 13
+
+-- a)
+divisores:: Integral a => a -> [a]
+divisores x     = filter (divisible x) [1..x]
+
+divisible:: Integral a => a -> a -> Bool
+divisible x y       = mod x y == 0
+
+-- b)
+lstDigits:: Integral a => a -> [a]
+lstDigits x     
+    | mod x 10 < 1      = []
+    | otherwise         = lstDigits (div x 10) ++ [mod x 10]
+
+-- c)
+sonPares:: Integral a => a -> Bool
+sonPares x  = todosPares (lstDigits x) 
+
+todosPares:: Integral a => [a] -> Bool
+todosPares []       = True
+todosPares (x:xs)   
+    | mod x 2 == 1  = False
+    | otherwise     = todosPares xs
+
+-- d) HECHO EN EJERCICIO 4
+-- e) HECHO EN EJERCICIO 5
+
+-- EJERCICIO 14
+
+-- a) POBLACIONES
+pIndia:: (Num a, Fractional a) => a -> a
+pIndia x        = crecimiento + 1267000
+    where crecimiento = (x - 2014)*(78/10000)*1267000
+    
+pChina:: (Num a, Fractional a) => a -> a
+pChina x        = crecimiento + 1368000
+    where crecimiento = (x - 2014)*(70/10000)*1368000
+    
+-- c) LISTAS
+pIndiaSuc:: (Fractional a, Eq a) => a -> [a]
+pIndiaSuc 0 = [pIndia 2014]
+pIndiaSuc x = pIndiaSuc (x-1) ++ [pIndia (2014 + x)]
+
+pChinaSuc:: (Fractional a, Eq a) => a -> [a]
+pChinaSuc 0 = [pChina 2014]
+pChinaSuc x = pChinaSuc (x-1) ++ [pChina (2014 + x)]
+
+-- d) LISTAS
+pIndiaSuc2:: (Fractional a, Eq a) => a -> [(a,a)]
+pIndiaSuc2 0 = [(2014,pIndia 2014)]
+pIndiaSuc2 x = pIndiaSuc2 (x-1) ++ [(2014 + x, pIndia (2014 + x))]
+
+pChinaSuc2:: (Fractional a, Eq a) => a -> [(a,a)]
+pChinaSuc2 0 = [(2014, pChina 2014)]
+pChinaSuc2 x = pChinaSuc2 (x-1) ++ [(2014 + x,pChina (2014 + x))]
+
