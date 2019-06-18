@@ -71,7 +71,7 @@ interseccion([X|C1],C2,C):-
 % "LO resultado aplicar TreeSort a L"
 
 treeSort(L,LO):-
-	listArbolOrd(L,L1),
+	listArbolOrd(L,AO),
 	inorden(AO,LO).		% primero izq, luego raíz, luego der
 
 % listArbolOrd(XS,AO)
