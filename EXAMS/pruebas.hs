@@ -1,12 +1,7 @@
-data ASec a b = Vacio | C a (ASec a b) | D b (ASec a b)
+reversee:: Eq a => [a] -> [a]
+reversee xs = foldr (\b c -> c ++ [b]) [] xs
 
-nelem:: (Eq c, Num c) => c -> ASec a b -> a 
-nelem 0 (C a (y))       = a
-nelem n y               = nelem (n-1) y
-
-separa:: ASec a b -> ([a],[b])
-separa Vacio            = ([],[])         
+reverse2:: Eq a => [a] -> [a]
+reverse2 = foldl (flip (:)) []
 
 
-instance Eq ASec a b where
-    C a xs == C a' xs'      = a == a' && xs == xs'
